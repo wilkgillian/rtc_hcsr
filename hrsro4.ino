@@ -2,23 +2,22 @@
 #include <DS3231.h>
 #include <Wire.h>
 
-
-HCSR04 hc(5, 6); //initialisation class HCSR04 (trig pin , echo pin)
+HCSR04 hc(5, 6); // initialisation class HCSR04 (trig pin , echo pin)
 RTClib myRTC;
 
-
 void setup()
-{ 
+{
   Serial.begin(57600);
   Wire.begin();
-    delay(500);
-  }
+  delay(500);
+}
 
 void loop()
 {
-  if (hc.dist() < 60){
+  if (hc.dist() < 60)
+  {
     DateTime now = myRTC.now();
-     Serial.print(now.year(), DEC);
+    Serial.print(now.year(), DEC);
     Serial.print('/');
     Serial.print(now.month(), DEC);
     Serial.print('/');
@@ -30,7 +29,7 @@ void loop()
     Serial.print(':');
     Serial.print(now.second(), DEC);
     Serial.println();
-    }
-//    Serial.println( hc.dist()); //return current distance (cm) in serial
-    delay(60);                   // we suggest to use over 60ms measurement cycle, in order to prevent trigger signal to the echo signal.
+  }
+  //    Serial.println( hc.dist()); //return current distance (cm) in serial
+  delay(60); // we suggest to use over 60ms measurement cycle, in order to prevent trigger signal to the echo signal.
 }
